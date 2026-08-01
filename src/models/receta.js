@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-const ResetaSchema = new Schema(
+const RecetaSchema = new Schema(
   {
     nombre: {
       type: String,
