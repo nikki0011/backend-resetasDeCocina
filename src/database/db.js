@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const conectarDB = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
-    console.info("Conexion a la BD exitosa");
+    console.info("Conexion exitosa a la BD");
   } catch (error) {
     console.error(error);
   }
