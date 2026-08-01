@@ -5,6 +5,7 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 import '../database/db.js'
 
+
 export default class Server {
   // el objetivo del construcotr es definir las propiedad el futuro objeto
   constructor() {
