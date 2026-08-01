@@ -7,6 +7,6 @@ import usuariosRouter from "./usuarios.routes.js"
 const router = Router()
 
 router.use('/recetas', recetasRouter)
-router.use('/usuarios-recetas', usuariosRouter)
+router.use('/usuarios', usuariosRouter)
 
 export default router
