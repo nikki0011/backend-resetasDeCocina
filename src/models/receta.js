@@ -29,7 +29,7 @@ const RecetaSchema = new Schema(
       required: true,
       minLength: 10,
       maxLength: 500
-    },
+    }
   },
   {
     timestamps: true,
