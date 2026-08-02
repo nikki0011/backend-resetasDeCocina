@@ -296,8 +296,8 @@ export const obtenerPerfil = async (req, res) => {
       email: usuarioBuscado.email,
       rol: usuarioBuscado.rol
     }
+    res.status(200).json(perfilUsuario)
    }
-   res.status(200).json(perfilUsuario)
   } catch (error) {
      console.error(error)
     res.status(500).json({mensaje: 'Ocurrio un error al obtener el perfil de ususario'})
