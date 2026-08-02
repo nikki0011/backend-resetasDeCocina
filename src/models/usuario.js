@@ -51,6 +51,20 @@ const UsuarioSchema = new Schema(
   },
 );
 
+UsuarioSchema.pre("save", async function () {
+  const usuario = this;
+  // preguntar si el password no fue modificado
+  if (!usuario.isModified("password")) return;
+  // aqui hasheamos el password
+  try {
+    const salt = await bcrypt.genSalt(10);
+    usuario.password = await bcrypt.hash(usuario.password, salt);
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+});
+
 const Usuario =  mongoose.model('usuario',UsuarioSchema)
 
 export default Usuario
