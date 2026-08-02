@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { confirmarCodigoVerificacion, crearUsuario, listarUsuarios, login, logout, registrarUsuario, solicitarNuevoCodigo } from "../controllers/usuarios.controllers.js";
+import { confirmarCodigoVerificacion, crearUsuario, listarUsuarios, login, logout, obtenerPerfil, registrarUsuario, solicitarNuevoCodigo } from "../controllers/usuarios.controllers.js";
 
 
 const router = Router()
@@ -12,5 +12,7 @@ router.route('/reenviar-codigo').post(solicitarNuevoCodigo)
 router.route('/login').post(login)
 router.route('/logout').post(logout)
 
+//ruta provada
+router.route("/perfil").get(obtenerPerfil)
 
 export default router

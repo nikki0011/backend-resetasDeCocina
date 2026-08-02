@@ -284,6 +284,26 @@ export const logout = async (req, res) =>{
   }
 }
 
+export const obtenerPerfil = async (req, res) => {
+  try {
+   const usuarioBuscado = await Usuario.findById(req.user.id);
+   if(!usuarioBuscado){
+    return res.status(404).jsos({mensaje: ' No se encntro un usuario con ese ID'})
+   }
+   {
+    const perfilUsuario = {
+      nombreUsuario: usuarioBuscado.nombreUsuario,
+      email: usuarioBuscado.email,
+      rol: usuarioBuscado.rol
+    }
+   }
+   res.status(200).json(perfilUsuario)
+  } catch (error) {
+     console.error(error)
+    res.status(500).json({mensaje: 'Ocurrio un error al obtener el perfil de ususario'})
+  }
+}
+
 
 
 
