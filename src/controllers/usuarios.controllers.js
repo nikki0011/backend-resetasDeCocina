@@ -1,5 +1,7 @@
 import Usuario from "../models/usuario.js";
 import { transporter } from "../utils/mailer.js";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
 
 export const crearUsuario = async (req, res) => {
   try {
@@ -220,5 +222,68 @@ export const solicitarNuevoCodigo = async (req, res) => {
       });
   }
 };
+
+export const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    // verificar si el mail es valido
+    const usuarioBuscado = await Usuario.findOne({ email: email });
+    if (!usuarioBuscado) {
+      return res
+        .status(401)
+        .json({ mensaje: "Credenciales invalidas - email" });
+    }
+    //verificar el password;
+    if (!(await bcrypt.compare(password, usuarioBuscado.password))) {
+      return res
+        .status(401)
+        .json({ mensaje: "Credenciales invalidad- password" });
+    }
+
+    //checkear que el usuario este verificado
+    if (!usuarioBuscado.verificado) {
+      return res.status(403).json({ mensaje: "Tu cuenta no fue vericada aun" });
+    }
+
+    // generar el token
+    const token = jwt.sign(
+      { id: usuarioBuscado._id, rol: usuarioBuscado.rol },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1h",
+      },
+    );
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 3600000,
+    });
+    res
+      .status(200)
+      .json({ mensaje: "login exitoso", nombre: usuarioBuscado.nombreUsuario });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ mensaje: "Ocurrio un error al crear el usuario" });
+  }
+};
+
+export const logout = async (req, res) =>{
+  try {
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 3600000,
+  })
+  res.status(200).json({mensaje:'Sesión cerrada exitosamente'})
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({mensaje: 'Ocurrio un error al intentar cerrar sesion'})
+  }
+}
+
+
 
 
