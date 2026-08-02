@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { crearUsuario, listarUsuarios, registrarUsuario } from "../controllers/usuarios.controllers.js";
+import { confirmarCodigoVerificacion, crearUsuario, listarUsuarios, registrarUsuario, solicitarNuevoCodigo } from "../controllers/usuarios.controllers.js";
 
 
 const router = Router()
@@ -7,5 +7,7 @@ const router = Router()
 
 router.route('/').post(crearUsuario).get(listarUsuarios)
 router.route('/registro').post(registrarUsuario)
+router.route('/verificar-cuenta').post(confirmarCodigoVerificacion)
+router.route('/reenviar-codigo').post(solicitarNuevoCodigo)
 
 export default router
