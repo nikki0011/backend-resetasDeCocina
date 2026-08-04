@@ -28,9 +28,9 @@ const RecetaSchema = new Schema(
       },
     },
     categoria: {
-      type: String,
-      required: true,
-      enum: ['Desayuno', 'Almuerzo','Merienda', 'Cena']
+      type: Schema.Types.ObjectId,
+      ref: 'categoria',
+      required: true
     },
     descripcion: {
       type: String,
