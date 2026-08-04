@@ -24,7 +24,7 @@ export const autenticador = (req, res, next) => {
 export const esAdmin = (req, res, next) => {
   // verificar si tenemos los datos del usuario em el req y verificar si es admin
   if (!req.user || req.user.rol !== "Admin") {
-    return res.status(403).json({
+   return res.status(403).json({
       mensaje: "Acceso denegado: permisos insuficientes",
     });
   }

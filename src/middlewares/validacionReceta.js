@@ -21,13 +21,13 @@ export const reglasReceta = [
       // si ya existe el nombre de la receta buscada retorno error
       throw new Error('El nombre de la receta ingresada ya exite, dato no valido ingrese un nombre distinto al ingresado')
     }),
-  body("categoria")
-    .isString()
-    .withMessage("El dato  de la categoria debe ser un string")
-    .isIn(['Desayuno', 'Almuerzo','Merienda', 'Cena'])
-    .withMessage(
-      "La categoria debe ser algunos de los siguientes valores: 'Desayuno', 'Almuerzo','Merienda', 'Cena'"
-    ),
+  // body("categoria")
+  //   .isString()
+  //   .withMessage("El dato  de la categoria debe ser un string")
+  //   .isIn(['Desayuno', 'Almuerzo','Merienda', 'Cena'])
+  //   .withMessage(
+  //     "La categoria debe ser algunos de los siguientes valores: 'Desayuno', 'Almuerzo','Merienda', 'Cena'"
+  //   ),
   body("imagen")
     .isString()
     .withMessage("La imagen debe ser un string")
