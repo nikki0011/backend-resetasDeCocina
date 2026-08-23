@@ -28,7 +28,7 @@ export const listarRecetas = async (req, res) => {
 export const obtenerRecetaPorID = async (req, res) => {
   try {
     console.log(req.params.id);
-    const recetaBuscada = await Receta.findById(req.params.id).populate('categoria','nombre descripcion');
+    const recetaBuscada = await Receta.findById(req.params.id).populate('categoria','nombre descripcion ingredientes');
     if (!recetaBuscada) {
       return res
         .status(404)

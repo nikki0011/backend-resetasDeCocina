@@ -39,7 +39,12 @@ export const reglasReceta = [
     .isString()
     .withMessage("La descripcion debe ser un string")
     .isLength({ min: 10, max: 500 })
-    .withMessage("La descripcion debe contener entre 10 y 500 caracteres")
+    .withMessage("La descripcion debe contener entre 10 y 500 caracteres"),
+    body("ingredientes")
+    .isString()
+    .withMessage("Los ingredientes deben ser un string")
+    .isLength({ min: 5, max: 100 })
+    .withMessage("Los ingredientes debe contener entre 5 y 100 caracteres")
 ];
 
 // para validar en post y put
